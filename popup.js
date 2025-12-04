@@ -4,7 +4,7 @@ document.getElementById('btnToggle').addEventListener('click', async () => {
   showing = !showing;
   document.getElementById('simpleTable').classList.toggle('hidden', !showing);
   document.getElementById('detailTable').classList.toggle('hidden', showing);
-  document.getElementById('btnToggle').textContent = showing ? '👁️ Скрыть таблицу' : '👁️ Показать таблицу';
+  document.getElementById('btnToggle').textContent = showing ? 'Скрыть таблицу' : 'Показать таблицу';
   if (showing) await refreshTables();
 });
 
