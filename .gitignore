@@ -1,1 +1,32 @@
-Nothing should be ignored based on the provided file changes. The changes consist only of source code and configuration files (JavaScript, HTML, JSON, Markdown) and image files (PNG icons), which should be tracked in version control.
+```
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+
+# Build artifacts
+dist/
+build/
+target/
+
+# System files
+.DS_Store
+Thumbs.db
+```
