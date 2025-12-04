@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 400px; font-family: sans-serif; padding: 10px; }
+    button { margin: 5px; }
+    table { width: 100%; font-size: 12px; }
+    th, td { padding: 4px; border: 1px solid #ccc; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <button id="btnToggle">👁️ Показать таблицу</button>
+  <button id="btnExport">📤 Экспорт в CSV</button>
+  <button id="btnClear">🧹 Очистить данные</button>
+
+  <div id="simpleTable" class="hidden">
+    <h3>Уникальные FQDN</h3>
+    <table id="fqdnTable">
+      <thead><tr><th>FQDN</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="detailTable" class="hidden">
+    <h3>Подробности (сортировка по клику)</h3>
+    <table id="detailTableEl">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">FQDN ▲▼</th>
+          <th onclick="sortTable(1)">Протоколы</th>
+          <th onclick="sortTable(2)">Кол-во</th>
+          <th onclick="sortTable(3)">Расширения</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
