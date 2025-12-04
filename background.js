@@ -3,18 +3,20 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ domainData: {} });
 });
 
-// Перехват всех сетевых запросов
-chrome.webRequest.onBeforeRequest.addListener(
+// Обработчик для захвата навигации по доменам
+chrome.webNavigation.onCommitted.addListener(
   async (details) => {
     try {
-      const url = new URL(details.url);
-      const currentTab = details.tabId;
+      // Игнорируем фоновые запросы и навигацию не в основной фрейм
+      if (details.frameId !== 0) return;
 
+      const url = new URL(details.url);
+      
       // Пропускаем data:, blob:, chrome-extension:
       if (!url.hostname || ['data', 'blob', 'chrome-extension'].includes(url.protocol.replace(':', ''))) return;
 
       // Получаем информацию о вкладке
-      const tab = await chrome.tabs.get(currentTab).catch(() => null);
+      const tab = await chrome.tabs.get(details.tabId).catch(() => null);
       if (!tab?.url) return;
       const currentHost = new URL(tab.url).hostname;
 
@@ -57,6 +59,5 @@ chrome.webRequest.onBeforeRequest.addListener(
       console.warn("URL parse error", details.url, e);
     }
   },
-  { urls: ["<all_urls>"] },
-  []
+  { url: [{ schemes: ["http", "https"] }] }
 );
